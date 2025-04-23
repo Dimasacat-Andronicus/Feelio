@@ -1,0 +1,16 @@
+enum EmojiMoodStatus {
+  initial,
+  loading,
+  loaded,
+  error,
+  empty,
+  happy,
+  sad,
+  angry,
+  nervous,
+  sleepy,
+  curious,
+  overthinking,
+  wow,
+  cool,
+}
