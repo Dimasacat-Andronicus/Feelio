@@ -1,11 +1,8 @@
 import 'package:feelio/features/mood_entry/bloc/mood_entry_bloc.dart';
-import 'package:feelio/features/mood_stats/mood_stats.dart';
-import 'package:feelio/features/mood_view/bloc/mood_view_bloc.dart';
 import 'package:feelio/shared/helpers.dart/mood_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'mood_home_list.dart';
 
 class MoodHome extends StatefulWidget {
   const MoodHome({super.key});

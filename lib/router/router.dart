@@ -4,6 +4,8 @@ import 'package:feelio/features/mood_view/views/mood_view_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../features/mood_stats/views/mood_stats_page.dart';
+
 final GoRouter _router = GoRouter(
   routes: <RouteBase>[
     GoRoute(
@@ -27,6 +29,13 @@ final GoRouter _router = GoRouter(
         final String? moodId =
             state.pathParameters['id']; // Retrieve ID from path parameters
         return MoodViewPage(moodId: moodId);
+      },
+    ),
+    GoRoute(
+      path: '/stats',
+      name: "stats",
+      builder: (BuildContext context, GoRouterState state) {
+        return const MoodStatsPage();
       },
     ),
   ],

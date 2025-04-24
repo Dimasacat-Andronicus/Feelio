@@ -60,6 +60,5 @@ class MoodTile extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }
