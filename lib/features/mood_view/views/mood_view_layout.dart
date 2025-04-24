@@ -14,7 +14,6 @@ class MoodViewLayout extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      color: Colors.white,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: BlocBuilder<MoodViewBloc, MoodViewState>(
         builder: (context, state) {

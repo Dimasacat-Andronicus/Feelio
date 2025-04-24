@@ -1,5 +1,6 @@
 import 'package:feelio/features/mood_list.dart/bloc/mood_list_bloc.dart';
 import 'package:feelio/features/mood_view/bloc/mood_view_bloc.dart';
+import 'package:feelio/utils/color_theme.dart';
 import 'package:feelio/utils/mood_repository.dart';
 import 'package:feelio/router/router.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +9,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'features/mood_entry/bloc/mood_entry_bloc.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -38,12 +39,36 @@ class MyApp extends StatelessWidget {
                   moodRepository: context.read<MoodRepository>(),
                 )..add(GetAllMoodEvent()),
           ),
+          BlocProvider(
+            create:
+                (context) =>
+                    MoodEntryBloc(
+                        moodRepository: context.read<MoodRepository>(),
+                      )
+                      ..add(GetMoodThemeEvent())
+                      ..add(GetAllMoodEvent()),
+          ),
         ],
-        child: MaterialApp.router(
-          title: 'Feelio',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme()),
-          routerConfig: router,
+        child: BlocBuilder<MoodEntryBloc, MoodEntryState>(
+          builder: (context, state) {
+            final bool isDarkMode = state.isDarkMode;
+            return MaterialApp.router(
+              title: 'Feelio',
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                useMaterial3: true,
+                colorScheme: lightColorScheme,
+                textTheme: GoogleFonts.poppinsTextTheme(),
+              ),
+              darkTheme: ThemeData(
+                useMaterial3: true,
+                colorScheme: darkColorScheme,
+                textTheme: GoogleFonts.poppinsTextTheme(),
+              ),
+              themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+              routerConfig: router,
+            );
+          },
         ),
       ),
     );

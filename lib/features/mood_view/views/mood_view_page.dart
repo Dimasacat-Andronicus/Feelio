@@ -11,9 +11,6 @@ class MoodViewPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("View Mood"),
         centerTitle: true,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        surfaceTintColor: Colors.white,
         automaticallyImplyLeading: false,
       ),
       body: MoodViewLayout(),

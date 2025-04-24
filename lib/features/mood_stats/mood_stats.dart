@@ -5,9 +5,6 @@ class MoodStats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: const Center(child: Text('Mood Stats')),
-    );
+    return Container(child: const Center(child: Text('Mood Stats')));
   }
 }

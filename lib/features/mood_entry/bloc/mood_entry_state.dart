@@ -14,27 +14,31 @@ class MoodEntryState extends Equatable {
     this.status = EmojiMoodStatus.initial,
     this.moods = const [],
     this.page = '',
+    this.isDarkMode = false,
     this.errorMessage = '',
   });
 
   final EmojiMoodStatus status;
   final List<MoodModel> moods;
   final String page;
+  final bool isDarkMode;
   final String errorMessage;
 
   @override
-  List<Object?> get props => [status, moods, page, errorMessage];
+  List<Object?> get props => [status, moods, page, isDarkMode, errorMessage];
 
   MoodEntryState copyWith({
     EmojiMoodStatus? status,
     List<MoodModel>? moods,
     String? page,
+    bool? isDarkMode,
     String? errorMessage,
   }) {
     return MoodEntryState(
       status: status ?? this.status,
       moods: moods ?? this.moods,
       page: page ?? this.page,
+      isDarkMode: isDarkMode ?? this.isDarkMode,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
