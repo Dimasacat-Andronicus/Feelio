@@ -1,8 +1,9 @@
 import 'package:feelio/features/mood_list.dart/bloc/mood_list_bloc.dart';
-import 'package:feelio/shared/helpers.dart/emoji_list.dart';
+import 'package:feelio/shared/helpers.dart/mood_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 class EmojiCarousel extends StatefulWidget {
   const EmojiCarousel({super.key});
@@ -29,7 +30,25 @@ class EmojiCarouselState extends State<EmojiCarousel> {
           context.read<EmojiMoodBloc>().add(GetUserMoodEvent(index: index));
         },
       ),
-      items: imageSliders,
+      items:
+          MoodHelpers().emojiList
+              .map(
+                (item) => ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  child: Stack(
+                    children: <Widget>[
+                      LottieBuilder.asset(
+                        item["url"]!,
+                        fit: BoxFit.contain,
+                        width: 1000.0,
+                        height: 1000.0,
+                        animate: true,
+                      ),
+                    ],
+                  ),
+                ),
+              )
+              .toList(),
     );
   }
 }

@@ -1,18 +1,14 @@
-import 'package:feelio/features/mood_list.dart/bloc/mood_list_bloc.dart';
 import 'package:feelio/features/mood_view/bloc/mood_view_bloc.dart';
 import 'package:feelio/features/mood_view/widgets/emoji_container.dart';
 import 'package:feelio/features/mood_view/widgets/journal_view_container.dart';
+import 'package:feelio/shared/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
-class MoodViewLayout extends StatefulWidget {
+class MoodViewLayout extends StatelessWidget {
   const MoodViewLayout({super.key});
 
-  @override
-  State<MoodViewLayout> createState() => _MoodViewLayoutState();
-}
-
-class _MoodViewLayoutState extends State<MoodViewLayout> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,8 +28,15 @@ class _MoodViewLayoutState extends State<MoodViewLayout> {
                 child: Column(
                   children: [
                     EmojiContainer(state: state),
-                    JournalViewContainer(),
+                    JournalViewContainer(state: state),
                     const SizedBox(height: 15),
+                    ButtonWidget(
+                      text: "Cancel",
+                      backgroundColor: Colors.red,
+                      onPressed: () {
+                        context.pushNamed("home");
+                      },
+                    ),
                   ],
                 ),
               )

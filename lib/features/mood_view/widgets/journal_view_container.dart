@@ -1,21 +1,52 @@
+import 'package:feelio/features/mood_view/bloc/mood_view_bloc.dart';
 import 'package:flutter/material.dart';
 
-class JournalViewContainer extends StatelessWidget {
-  const JournalViewContainer({super.key});
+class JournalViewContainer extends StatefulWidget {
+  const JournalViewContainer({super.key, required this.state});
+  final MoodViewState state;
+
+  @override
+  State<JournalViewContainer> createState() => _JournalViewContainerState();
+}
+
+class _JournalViewContainerState extends State<JournalViewContainer> {
+  late ScrollController _scrollController;
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final List<Map<String, dynamic>> mood =
+        widget.state.userMood.map((e) => e.toMap()).toList();
+    final String description =
+        mood.first['description'].toString().isEmpty
+            ? "No description provided."
+            : mood.first['description'].toString();
+    return SizedBox(
       width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(color: Colors.grey.shade300),
-      ),
-      child: const Text(
-        'Lore, ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        maxLines: 10,
-        style: TextStyle(fontSize: 16, color: Colors.grey),
+      height: 250,
+      child: Scrollbar(
+        thumbVisibility: true,
+        controller: _scrollController,
+        child: SingleChildScrollView(
+          controller: _scrollController,
+          padding: const EdgeInsets.all(
+            12,
+          ), // Adds padding for better readability
+          child: Text(
+            description,
+            style: TextStyle(fontSize: 14, color: Colors.grey[800]),
+          ),
+        ),
       ),
     );
   }
