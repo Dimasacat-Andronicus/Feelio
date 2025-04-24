@@ -1,7 +1,8 @@
 import 'package:feelio/features/mood_entry/views/mood_home_list.dart';
 import 'package:feelio/features/mood_list.dart/views/mood_list_page.dart';
-import 'package:feelio/features/mood_stats/mood_stats.dart';
 import 'package:flutter/widgets.dart';
+
+import '../../features/mood_stats/views/mood_stats_page.dart';
 
 class MoodHelpers {
   String getEmojiName(int index) {
@@ -68,7 +69,7 @@ class MoodHelpers {
       case 'home':
         return const MoodHomeList();
       case 'stats':
-        return const MoodStats();
+        return const MoodStatsPage();
       case 'add-mood':
         return const MoodListPage();
       default:
