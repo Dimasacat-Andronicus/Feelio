@@ -16,16 +16,15 @@ class TextArea extends StatelessWidget {
           contentPadding: const EdgeInsets.all(12),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
-            borderSide: const BorderSide(color: Colors.grey),
+            borderSide: const BorderSide(),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
-            borderSide: const BorderSide(color: Colors.blue),
+            borderSide: const BorderSide(),
           ),
           hintText: "Describe your mood...",
-          hintStyle: const TextStyle(color: Colors.grey, fontSize: 14.0),
-          filled: true,
-          fillColor: Colors.white, // Background color for better visibility
+          hintStyle: const TextStyle(fontSize: 14.0),
+          filled: true, // Background color for better visibility
         ),
       ),
     );

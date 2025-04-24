@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:feelio/features/models/mood_model.dart';
 import 'package:feelio/utils/database.dart';
 import 'package:feelio/shared/helpers.dart/mood_helper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MoodRepository {
   final MoodDatabase dbHelper = MoodDatabase.instance;
@@ -35,6 +36,20 @@ class MoodRepository {
     final db = await dbHelper.database;
     final List<Map<String, dynamic>> result = await db.query('mood');
     return result.map((map) => MoodModel.fromMap(map)).toList();
+  }
+
+  Future<bool> setUserTheme(bool isDarkMode) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isDarkMode', isDarkMode);
+    log('Set Dark Mode: $isDarkMode'); // Debugging line
+    return isDarkMode;
+  }
+
+  Future<bool> getUserTheme() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final bool? theme = prefs.getBool('isDarkMode');
+    log('Is Dark Mode: $theme'); // Debugging line
+    return theme ?? false;
   }
 
   Future<Map<String, int>> getMoodStats({

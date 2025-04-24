@@ -16,7 +16,7 @@ class MoodListPage extends StatelessWidget {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        color: Colors.white,
+
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: BlocBuilder<EmojiMoodBloc, EmojiMoodState>(

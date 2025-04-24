@@ -8,6 +8,15 @@ class MoodEntryEvent extends Equatable {
 
 class GetAllMoodEvent extends MoodEntryEvent {}
 
+class ToggleMoodThemeEvent extends MoodEntryEvent {
+  const ToggleMoodThemeEvent({required this.isDarkMode});
+  final bool isDarkMode;
+  @override
+  List<Object?> get props => [isDarkMode];
+}
+
+class GetMoodThemeEvent extends MoodEntryEvent {}
+
 class MoodUpdatedEvent extends MoodEntryEvent {
   final List<MoodModel> moods;
   const MoodUpdatedEvent({required this.moods});

@@ -4,17 +4,16 @@ class ButtonWidget extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final Color backgroundColor;
-  final Color textColor;
+  final Color? textColor;
 
   const ButtonWidget({
     super.key,
     required this.text,
     required this.onPressed,
     required this.backgroundColor,
-    this.textColor = Colors.white,
+    this.textColor,
   });
 
-  @override
   Widget build(BuildContext context) {
     return SizedBox(
       width:

@@ -42,10 +42,7 @@ class _JournalViewContainerState extends State<JournalViewContainer> {
           padding: const EdgeInsets.all(
             12,
           ), // Adds padding for better readability
-          child: Text(
-            description,
-            style: TextStyle(fontSize: 14, color: Colors.grey[800]),
-          ),
+          child: Text(description, style: TextStyle(fontSize: 14)),
         ),
       ),
     );

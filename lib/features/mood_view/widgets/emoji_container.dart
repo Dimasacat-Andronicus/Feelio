@@ -22,17 +22,16 @@ class EmojiContainer extends StatelessWidget {
           animate: true,
         ),
         Card(
-          color: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
-            side: BorderSide(color: Colors.grey.shade300),
+            side: BorderSide(),
           ),
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Text(
               moodText,
               maxLines: 10,
-              style: const TextStyle(fontSize: 16, color: Colors.grey),
+              style: const TextStyle(fontSize: 16),
             ),
           ),
         ),

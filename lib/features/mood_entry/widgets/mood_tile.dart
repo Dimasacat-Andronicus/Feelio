@@ -9,6 +9,7 @@ class MoodTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final defaultColorScheme = Theme.of(context).colorScheme;
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Padding(
@@ -22,8 +23,9 @@ class MoodTile extends StatelessWidget {
                 children: [
                   Text(
                     mood.mood,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 18,
+                      color: defaultColorScheme.primary,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -32,7 +34,10 @@ class MoodTile extends StatelessWidget {
                     mood.description,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 14),
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: defaultColorScheme.secondary,
+                    ),
                   ),
                 ],
               ),
@@ -42,15 +47,17 @@ class MoodTile extends StatelessWidget {
               children: [
                 Text(
                   monthName(date.month),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 14,
+                    color: defaultColorScheme.tertiary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   '${date.day}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
+                    color: defaultColorScheme.tertiary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

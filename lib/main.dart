@@ -1,5 +1,6 @@
 import 'package:feelio/features/mood_list.dart/bloc/mood_list_bloc.dart';
 import 'package:feelio/features/mood_view/bloc/mood_view_bloc.dart';
+import 'package:feelio/utils/color_theme.dart';
 import 'features/mood_entry/bloc/mood_entry_bloc.dart';
 import 'features/mood_stats/bloc/mood_stats_bloc.dart';
 import 'package:feelio/utils/mood_repository.dart';
@@ -39,16 +40,43 @@ class MyApp extends StatelessWidget {
                 )..add(GetAllMoodEvent()),
           ),
           BlocProvider(
-            create: (context) => MoodStatsBloc(
-              moodRepository: RepositoryProvider.of<MoodRepository>(context),
-            ),
+            create:
+                (context) =>
+                    MoodEntryBloc(
+                        moodRepository: context.read<MoodRepository>(),
+                      )
+                      ..add(GetMoodThemeEvent())
+                      ..add(GetAllMoodEvent()),
+          ),
+          BlocProvider(
+            create:
+                (context) => MoodStatsBloc(
+                  moodRepository: RepositoryProvider.of<MoodRepository>(
+                    context,
+                  ),
+                ),
           ),
         ],
-        child: MaterialApp.router(
-          title: 'Feelio',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme()),
-          routerConfig: router,
+        child: BlocBuilder<MoodEntryBloc, MoodEntryState>(
+          builder: (context, state) {
+            final bool isDarkMode = state.isDarkMode;
+            return MaterialApp.router(
+              title: 'Feelio',
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                useMaterial3: true,
+                colorScheme: lightColorScheme,
+                textTheme: GoogleFonts.poppinsTextTheme(),
+              ),
+              darkTheme: ThemeData(
+                useMaterial3: true,
+                colorScheme: darkColorScheme,
+                textTheme: GoogleFonts.poppinsTextTheme(),
+              ),
+              themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+              routerConfig: router,
+            );
+          },
         ),
       ),
     );

@@ -16,6 +16,7 @@ class _MoodHomeState extends State<MoodHome> {
   void initState() {
     super.initState();
     context.read<MoodEntryBloc>().add(const NavigatePageEvent(page: 'home'));
+    context.read<MoodEntryBloc>().add(GetMoodThemeEvent());
   }
 
   @override
@@ -24,20 +25,29 @@ class _MoodHomeState extends State<MoodHome> {
       builder: (context, state) {
         final String pageName = MoodHelpers().setAppBarTitle(state.page);
         final Widget pageScreen = MoodHelpers().setScreenBody(state.page);
+        final bool isDarkMode = state.isDarkMode;
+
         return Scaffold(
           appBar: AppBar(
             title: Text(pageName),
             automaticallyImplyLeading: false,
             centerTitle: true,
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.black,
-            surfaceTintColor: Colors.white,
+            actions: [
+              IconButton(
+                onPressed: () async {
+                  context.read<MoodEntryBloc>().add(
+                    ToggleMoodThemeEvent(isDarkMode: !isDarkMode),
+                  );
+                },
+                icon: Icon(isDarkMode ? Icons.dark_mode_rounded : Icons.sunny),
+              ),
+            ],
           ),
+
           bottomNavigationBar: BottomAppBar(
             height: 80,
             shape: CircularNotchedRectangle(),
             notchMargin: 6,
-            color: Colors.grey[800],
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -47,7 +57,7 @@ class _MoodHomeState extends State<MoodHome> {
                       const NavigatePageEvent(page: 'home'),
                     );
                   },
-                  icon: Icon(Icons.home, color: Colors.white),
+                  icon: Icon(Icons.home),
                 ),
                 IconButton(
                   onPressed: () {
@@ -55,7 +65,7 @@ class _MoodHomeState extends State<MoodHome> {
                       const NavigatePageEvent(page: 'stats'),
                     );
                   },
-                  icon: Icon(Icons.query_stats, color: Colors.white),
+                  icon: Icon(Icons.query_stats),
                 ),
               ],
             ),
@@ -70,8 +80,6 @@ class _MoodHomeState extends State<MoodHome> {
                   : const Center(child: CircularProgressIndicator()),
 
           floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.grey[800],
-            foregroundColor: Colors.white,
             onPressed: () {
               context.pushNamed('add-mood');
             },

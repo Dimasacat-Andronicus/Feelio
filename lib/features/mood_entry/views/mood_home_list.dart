@@ -32,25 +32,22 @@ class _MoodHomeListState extends State<MoodHomeList> {
         if (state.status.isLoaded && state.moods.isEmpty) {
           return const Center(child: Text('No moods available.'));
         }
-        return Container(
-          color: Colors.white,
-          child: ListView.builder(
-            itemCount: state.moods.length,
-            itemBuilder: (context, index) {
-              final mood = state.moods[index];
-              final date = DateTime.parse(mood.timestamp);
-              return GestureDetector(
-                onTap:
-                    () => {
-                      context.push('/view-details/${mood.id}'),
-                      context.read<MoodViewBloc>().add(
-                        ViewUserMoodEvent(id: mood.id!),
-                      ),
-                    },
-                child: MoodTile(mood: mood, date: date),
-              );
-            },
-          ),
+        return ListView.builder(
+          itemCount: state.moods.length,
+          itemBuilder: (context, index) {
+            final mood = state.moods[index];
+            final date = DateTime.parse(mood.timestamp);
+            return GestureDetector(
+              onTap:
+                  () => {
+                    context.push('/view-details/${mood.id}'),
+                    context.read<MoodViewBloc>().add(
+                      ViewUserMoodEvent(id: mood.id!),
+                    ),
+                  },
+              child: MoodTile(mood: mood, date: date),
+            );
+          },
         );
       },
     );
