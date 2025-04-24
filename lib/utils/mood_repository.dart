@@ -19,7 +19,6 @@ class MoodRepository {
     log("result: $result");
     return result.map((map) => MoodModel.fromMap(map)).toList();
   }
-
   Future<List<MoodModel>> viewUserMood(int id) async {
     final db = await dbHelper.database;
     final List<Map<String, dynamic>> result = await db.query(
@@ -29,5 +28,12 @@ class MoodRepository {
     );
     log("result: $result");
     return result.map((map) => MoodModel.fromMap(map)).toList();
+  }
+  Stream<List<MoodModel>> getAllMoodStream() async* {
+    final db = await dbHelper.database;
+    yield* Stream.periodic(const Duration(seconds: 1), (_) async {
+      final List<Map<String, dynamic>> result = await db.query('mood');
+      return result.map((map) => MoodModel.fromMap(map)).toList();
+    }).asyncMap((event) async => await event);
   }
 }

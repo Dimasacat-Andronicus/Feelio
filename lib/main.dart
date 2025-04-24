@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'features/mood_entry/bloc/mood_entry_bloc.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -29,6 +31,12 @@ class MyApp extends StatelessWidget {
                 (context) => MoodViewBloc(
                   moodRepository: context.read<MoodRepository>(),
                 ),
+           ),
+          BlocProvider(
+            create:
+                (context) => MoodEntryBloc(
+                  moodRepository: MoodRepository(),
+                )..add(MoodEntryEvent())
           ),
         ],
         child: MaterialApp.router(

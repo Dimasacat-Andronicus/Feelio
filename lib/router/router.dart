@@ -6,15 +6,16 @@ import 'package:go_router/go_router.dart';
 
 final GoRouter _router = GoRouter(
   routes: <RouteBase>[
-    // GoRoute(
-    //   path: '/',
-    //   builder: (BuildContext context, state) {
-    //     return const MoodHome();
-    //   },
-    // ),
+     GoRoute(
+       path: '/',
+       name: 'home',
+       builder: (BuildContext context, state) {
+         return const MoodHome();
+       },
+     ),
     GoRoute(
-      path: '/',
-      name: "home",
+      path: '/new',
+      name: "new",
       builder: (BuildContext context, GoRouterState state) {
         return const MoodListPage();
       },
