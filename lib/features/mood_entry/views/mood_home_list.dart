@@ -29,7 +29,7 @@ class MoodHomeList extends StatelessWidget {
 
               return GestureDetector(
                 onTap: () {
-                  context.push('/entry/${mood.id}');
+                  context.go('/view-details/${mood.id}');
                 },
                 child: Card(
                   margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
