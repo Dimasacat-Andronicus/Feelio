@@ -1,12 +1,12 @@
 import 'package:feelio/features/mood_list.dart/bloc/mood_list_bloc.dart';
 import 'package:feelio/features/mood_view/bloc/mood_view_bloc.dart';
+import 'features/mood_entry/bloc/mood_entry_bloc.dart';
+import 'features/mood_stats/bloc/mood_stats_bloc.dart';
 import 'package:feelio/utils/mood_repository.dart';
 import 'package:feelio/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'features/mood_entry/bloc/mood_entry_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,6 +37,11 @@ class MyApp extends StatelessWidget {
                 (context) => MoodEntryBloc(
                   moodRepository: MoodRepository(),
                 )..add(MoodEntryEvent())
+          ),
+          BlocProvider(
+            create: (context) => MoodStatsBloc(
+              moodRepository: RepositoryProvider.of<MoodRepository>(context),
+            ),
           ),
         ],
         child: MaterialApp.router(
