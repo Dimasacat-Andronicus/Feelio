@@ -1,5 +1,5 @@
 import 'package:feelio/features/mood_list.dart/bloc/mood_list_bloc.dart';
-import 'package:feelio/features/mood_list.dart/utils/strings.dart';
+import 'package:feelio/utils/strings.dart';
 import 'package:feelio/features/mood_list.dart/views/mood_list_widget.dart';
 import 'package:feelio/shared/widgets/journal_container.dart';
 import 'package:feelio/shared/widgets/save_button_container.dart';
