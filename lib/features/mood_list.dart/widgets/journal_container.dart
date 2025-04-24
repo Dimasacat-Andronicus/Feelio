@@ -13,17 +13,19 @@ class JournalContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(Str().hru, style: TextStyle(fontSize: 16)),
-        const SizedBox(height: 15),
-        Text(
-          state.emoji,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 15),
-      ],
+    return Material(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(Str().hru, style: TextStyle(fontSize: 16)),
+          const SizedBox(height: 15),
+          Text(
+            state.emoji,
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 15),
+        ],
+      ),
     );
   }
 }

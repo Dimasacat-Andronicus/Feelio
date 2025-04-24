@@ -19,4 +19,15 @@ class MoodRepository {
     log("result: $result");
     return result.map((map) => MoodModel.fromMap(map)).toList();
   }
+
+  Future<List<MoodModel>> viewUserMood(int id) async {
+    final db = await dbHelper.database;
+    final List<Map<String, dynamic>> result = await db.query(
+      'mood',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    log("result: $result");
+    return result.map((map) => MoodModel.fromMap(map)).toList();
+  }
 }

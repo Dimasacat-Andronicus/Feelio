@@ -20,31 +20,27 @@ extension EmojiMoodStatusX on EmojiMoodStatus {
 class EmojiMoodState extends Equatable {
   const EmojiMoodState({
     this.status = EmojiMoodStatus.empty,
-    this.emoji = '',
-    this.description = '',
     this.errorMessage = '',
+    this.emoji = '',
     this.userMood = const [],
   });
   final EmojiMoodStatus status;
-  final String emoji;
-  final String description;
   final String errorMessage;
+  final String emoji;
   final List<MoodModel> userMood;
 
   @override
-  List<Object?> get props => [status, emoji, description, userMood];
+  List<Object?> get props => [status, emoji, errorMessage, userMood];
 
   EmojiMoodState copyWith({
     EmojiMoodStatus? status,
-    String? emoji,
-    String? description,
     String? errorMessage,
+    String? emoji,
     List<MoodModel>? userMood,
   }) {
     return EmojiMoodState(
       status: status ?? this.status,
       emoji: emoji ?? this.emoji,
-      description: description ?? this.description,
       errorMessage: errorMessage ?? this.errorMessage,
       userMood: userMood ?? this.userMood,
     );

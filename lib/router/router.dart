@@ -1,4 +1,6 @@
 import 'package:feelio/features/mood_list.dart/views/mood_list_layout.dart';
+import 'package:feelio/features/mood_list.dart/views/mood_list_page.dart';
+import 'package:feelio/features/mood_view/mood_view_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,7 +16,14 @@ final GoRouter _router = GoRouter(
       path: '/',
       name: "home",
       builder: (BuildContext context, GoRouterState state) {
-        return const MoodListLayout();
+        return const MoodListPage();
+      },
+    ),
+    GoRoute(
+      path: '/view-details',
+      name: "view-details",
+      builder: (BuildContext context, GoRouterState state) {
+        return const MoodViewPage();
       },
     ),
   ],
