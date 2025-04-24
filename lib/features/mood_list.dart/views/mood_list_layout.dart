@@ -21,7 +21,7 @@ class MoodListLayout extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          onPressed: () => context.go("/"),
+          onPressed: () => context.goNamed("home"),
           icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
         ),
       ),
@@ -32,20 +32,22 @@ class MoodListLayout extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: BlocBuilder<EmojiMoodBloc, EmojiMoodState>(
           builder: (context, state) {
-            return Column(
-              children: [
-                MoodListWidget(state: state),
-                JournalContainer(
-                  state: state,
-                  controller: descriptionController,
-                ),
-                TextArea(controller: descriptionController, state: state),
-                const SizedBox(height: 15),
-                SaveButtonContainer(
-                  controller: descriptionController,
-                  state: state,
-                ),
-              ],
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  MoodListWidget(state: state),
+                  JournalContainer(
+                    state: state,
+                    controller: descriptionController,
+                  ),
+                  TextArea(controller: descriptionController, state: state),
+                  const SizedBox(height: 15),
+                  SaveButtonContainer(
+                    controller: descriptionController,
+                    state: state,
+                  ),
+                ],
+              ),
             );
           },
         ),
