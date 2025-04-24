@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:feelio/features/mood_entry/models/mood_model.dart';
-import 'package:feelio/features/mood_list.dart/utils/database.dart';
+import 'package:feelio/utils/database.dart';
 import 'package:feelio/shared/helpers.dart/emoji_name.dart';
 
 class MoodRepository {

@@ -12,6 +12,7 @@ final GoRouter _router = GoRouter(
     // ),
     GoRoute(
       path: '/',
+      name: "home",
       builder: (BuildContext context, GoRouterState state) {
         return const MoodListLayout();
       },
