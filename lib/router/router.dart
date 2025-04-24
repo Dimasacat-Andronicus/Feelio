@@ -1,18 +1,20 @@
 import 'package:feelio/features/mood_list.dart/views/mood_list_layout.dart';
+import '../features/mood_entry/views/mood_home_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter _router = GoRouter(
   routes: <RouteBase>[
-    // GoRoute(
-    //   path: '/',
-    //   builder: (BuildContext context, state) {
-    //     return const MoodHome();
-    //   },
-    // ),
+     GoRoute(
+       path: '/',
+       name: 'home',
+       builder: (BuildContext context, state) {
+         return const MoodHome();
+       },
+     ),
     GoRoute(
-      path: '/',
-      name: "home",
+      path: '/new',
+      name: "new",
       builder: (BuildContext context, GoRouterState state) {
         return const MoodListLayout();
       },
