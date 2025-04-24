@@ -31,12 +31,12 @@ class MyApp extends StatelessWidget {
                 (context) => MoodViewBloc(
                   moodRepository: context.read<MoodRepository>(),
                 ),
-           ),
+          ),
           BlocProvider(
             create:
                 (context) => MoodEntryBloc(
-                  moodRepository: MoodRepository(),
-                )..add(MoodEntryEvent())
+                  moodRepository: context.read<MoodRepository>(),
+                )..add(GetAllMoodEvent()),
           ),
           BlocProvider(
             create: (context) => MoodStatsBloc(
@@ -46,6 +46,7 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp.router(
           title: 'Feelio',
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme()),
           routerConfig: router,
         ),
