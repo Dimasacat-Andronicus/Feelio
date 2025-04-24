@@ -8,11 +8,18 @@ class MoodHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Mood Tracker')),
+      appBar: AppBar(title: const Text('Mood Tracker'), actions: [
+        IconButton(
+          icon: const Icon(Icons.pie_chart),
+          onPressed: () {
+            context.go('/stats');
+          },
+        ),
+      ]),
       body: const MoodHomeList(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.push('/new');
+          context.go('/new');
         },
         tooltip: 'Add New Mood',
         child: const Icon(Icons.add),
