@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:feelio/features/mood_entry/models/mood_model.dart';
+import 'package:feelio/features/models/mood_model.dart';
 import 'package:feelio/utils/mood_enums.dart';
 import 'package:feelio/utils/mood_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

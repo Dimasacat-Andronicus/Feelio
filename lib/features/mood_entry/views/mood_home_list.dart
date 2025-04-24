@@ -1,92 +1,57 @@
+import 'package:feelio/features/mood_entry/widgets/mood_tile.dart';
+import 'package:feelio/features/mood_view/bloc/mood_view_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:feelio/features/mood_entry/bloc/mood_entry_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../../utils/date.dart';
 
-import '../../../utils/mood_enums.dart';
-
-class MoodHomeList extends StatelessWidget {
+class MoodHomeList extends StatefulWidget {
   const MoodHomeList({super.key});
+
+  @override
+  State<MoodHomeList> createState() => _MoodHomeListState();
+}
+
+class _MoodHomeListState extends State<MoodHomeList> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<MoodEntryBloc>().add(GetAllMoodEvent());
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MoodEntryBloc, MoodEntryState>(
       builder: (context, state) {
-        if (state.status == EmojiMoodStatus.loading) {
+        if (state.status.isLoading) {
           return const Center(child: CircularProgressIndicator());
-        } else if (state.status == EmojiMoodStatus.error) {
+        }
+        if (state.status.isError) {
           return Center(child: Text('Error: ${state.errorMessage}'));
-        } else if (state.status == EmojiMoodStatus.loaded) {
-          if (state.moods.isEmpty) {
-            return const Center(child: Text('No moods available.'));
-          }
-          return ListView.builder(
+        }
+        if (state.status.isLoaded && state.moods.isEmpty) {
+          return const Center(child: Text('No moods available.'));
+        }
+        return Container(
+          color: Colors.white,
+          child: ListView.builder(
             itemCount: state.moods.length,
             itemBuilder: (context, index) {
               final mood = state.moods[index];
               final date = DateTime.parse(mood.timestamp);
-
               return GestureDetector(
-                onTap: () {
-                  context.push('/entry/${mood.id}');
-                },
-                child: Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                mood.mood,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                mood.description,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(fontSize: 14),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              monthName(date.month),
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              '${date.day}',
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                onTap:
+                    () => {
+                      context.push('/view-details/${mood.id}'),
+                      context.read<MoodViewBloc>().add(
+                        ViewUserMoodEvent(id: mood.id!),
+                      ),
+                    },
+                child: MoodTile(mood: mood, date: date),
               );
             },
-          );
-        }
-        return const SizedBox.shrink();
+          ),
+        );
       },
     );
   }

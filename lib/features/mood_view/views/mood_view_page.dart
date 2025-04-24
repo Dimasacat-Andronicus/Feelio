@@ -1,9 +1,9 @@
-import 'package:feelio/features/mood_view/mood_view_layout.dart';
+import 'package:feelio/features/mood_view/views/mood_view_layout.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class MoodViewPage extends StatelessWidget {
-  const MoodViewPage({super.key});
+  const MoodViewPage({super.key, required this.moodId});
+  final String? moodId;
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +14,7 @@ class MoodViewPage extends StatelessWidget {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         surfaceTintColor: Colors.white,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            context.goNamed("home");
-          },
-        ),
+        automaticallyImplyLeading: false,
       ),
       body: MoodViewLayout(),
     );
