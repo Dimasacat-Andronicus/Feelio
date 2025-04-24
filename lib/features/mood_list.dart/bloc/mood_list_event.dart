@@ -3,7 +3,7 @@ part of 'mood_list_bloc.dart';
 class EmojiMoodEvent extends Equatable {
   const EmojiMoodEvent();
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }
 
 class GetUserMoodEvent extends EmojiMoodEvent {

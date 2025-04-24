@@ -1,5 +1,5 @@
 import 'package:feelio/features/mood_list.dart/bloc/mood_list_bloc.dart';
-import 'package:feelio/shared/widgets/emoji_carousel.dart';
+import 'package:feelio/features/mood_list.dart/widgets/emoji_carousel.dart';
 import 'package:feelio/shared/widgets/error_widget.dart';
 import 'package:flutter/material.dart';
 

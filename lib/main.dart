@@ -1,4 +1,5 @@
 import 'package:feelio/features/mood_list.dart/bloc/mood_list_bloc.dart';
+import 'package:feelio/features/mood_view/bloc/mood_view_bloc.dart';
 import 'package:feelio/utils/mood_repository.dart';
 import 'package:feelio/router/router.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,13 @@ class MyApp extends StatelessWidget {
                   moodRepository: context.read<MoodRepository>(),
                 )..add(GetUserMoodEvent(index: 0)),
           ),
-          BlocProvider<MoodEntryBloc>(
+          BlocProvider(
+            create:
+                (context) => MoodViewBloc(
+                  moodRepository: context.read<MoodRepository>(),
+                ),
+           ),
+          BlocProvider(
             create:
                 (context) => MoodEntryBloc(
                   moodRepository: MoodRepository(),
