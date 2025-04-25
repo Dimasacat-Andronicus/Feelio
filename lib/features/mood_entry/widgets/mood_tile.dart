@@ -1,68 +1,42 @@
 import 'package:feelio/features/models/mood_model.dart';
-import 'package:feelio/utils/date.dart';
+import 'package:feelio/features/mood_entry/widgets/date_info.dart';
+import 'package:feelio/features/mood_entry/widgets/mood_icon.dart';
+import 'package:feelio/features/mood_entry/widgets/mood_info.dart';
+import 'package:feelio/utils/mood_enums.dart';
 import 'package:flutter/material.dart';
 
 class MoodTile extends StatelessWidget {
   const MoodTile({super.key, required this.mood, required this.date});
+
   final MoodModel mood;
   final DateTime date;
 
   @override
   Widget build(BuildContext context) {
-    final defaultColorScheme = Theme.of(context).colorScheme;
+    final colorTheme = Theme.of(context).colorScheme;
+
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      color: colorTheme.primaryContainer,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(
+          color: Mood.values.byName(mood.mood).emojiColor,
+          width: 1.5,
+        ),
+      ),
+      elevation: 4,
+      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            MoodIcon(mood: mood), // Extracted widget
+            const SizedBox(width: 12),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    mood.mood,
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: defaultColorScheme.primary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    mood.description,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: defaultColorScheme.secondary,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  monthName(date.month),
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: defaultColorScheme.tertiary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  '${date.day}',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: defaultColorScheme.tertiary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
+              child: MoodInfo(mood: mood, colorTheme: colorTheme),
+            ), // Extracted widget
+            DateInfo(date: date, colorTheme: colorTheme), // Extracted widget
           ],
         ),
       ),

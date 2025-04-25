@@ -13,28 +13,30 @@ class ButtonWidget extends StatelessWidget {
     required this.backgroundColor,
     this.textColor,
   });
-
+  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width:
-          double.infinity, // Makes button take full width of parent container
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor,
-          padding: const EdgeInsets.symmetric(
-            vertical: 16,
-          ), // Adjust button height
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8), // Rounded corners
+    return Expanded(
+      child: SizedBox(
+        width:
+            MediaQuery.of(context).size.width * 0.5, // Adjust width as needed
+        child: ElevatedButton(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: backgroundColor,
+            padding: const EdgeInsets.symmetric(
+              vertical: 16,
+            ), // Adjust button height
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8), // Rounded corners
+            ),
           ),
-        ),
-        child: Text(
-          text,
-          style: TextStyle(
-            color: textColor,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
+          child: Text(
+            text,
+            style: TextStyle(
+              color: textColor,
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),

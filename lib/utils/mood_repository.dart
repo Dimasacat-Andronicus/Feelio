@@ -2,14 +2,14 @@ import 'dart:developer';
 
 import 'package:feelio/features/models/mood_model.dart';
 import 'package:feelio/utils/database.dart';
-import 'package:feelio/shared/helpers.dart/mood_helper.dart';
+import 'package:feelio/utils/mood_enums.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MoodRepository {
   final MoodDatabase dbHelper = MoodDatabase.instance;
 
   Future<String> getUserMood(int emoji) async {
-    final result = MoodHelpers().getEmojiName(emoji);
+    final result = Mood.values[emoji].name;
     return result;
   }
 
@@ -35,6 +35,7 @@ class MoodRepository {
   Future<List<MoodModel>> getAllListMood() async {
     final db = await dbHelper.database;
     final List<Map<String, dynamic>> result = await db.query('mood');
+    log("result: $result");
     return result.map((map) => MoodModel.fromMap(map)).toList();
   }
 
