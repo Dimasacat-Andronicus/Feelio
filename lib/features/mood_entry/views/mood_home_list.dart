@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:feelio/features/mood_entry/bloc/mood_entry_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 
+import '../../models/mood_model.dart';
+
 class MoodHomeList extends StatefulWidget {
   const MoodHomeList({super.key});
 
@@ -33,10 +35,15 @@ class _MoodHomeListState extends State<MoodHomeList> {
         if (state.status.isLoaded && state.moods.isEmpty) {
           return const Center(child: Text('No moods available.'));
         }
+
+        final sortedMoods = List<MoodModel>.from(state.moods)
+          ..sort((a, b) => DateTime.parse(b.timestamp)
+              .compareTo(DateTime.parse(a.timestamp)));
+
         return ListView.builder(
-          itemCount: state.moods.length,
+          itemCount: sortedMoods.length,
           itemBuilder: (context, index) {
-            final mood = state.moods[index];
+            final mood = sortedMoods[index];
             final date = DateTime.parse(mood.timestamp);
             return GestureDetector(
               onTap: () {

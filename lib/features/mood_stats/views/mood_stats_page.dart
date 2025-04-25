@@ -7,13 +7,7 @@ class MoodStatsPage extends StatelessWidget {
   const MoodStatsPage({super.key});
 
   Future<void> _onRefresh(BuildContext context) async {
-    final now = DateTime.now();
-    final startOfWeek = now.subtract(Duration(days: now.weekday - 1));
-    final endOfWeek = startOfWeek.add(const Duration(days: 6));
-
-    context.read<MoodStatsBloc>().add(
-      FetchMoodStatsEvent(startDate: startOfWeek, endDate: endOfWeek),
-    );
+    context.read<MoodStatsBloc>().add(FetchMoodStatsEvent());
   }
 
   @override

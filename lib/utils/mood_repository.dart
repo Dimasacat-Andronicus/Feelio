@@ -53,25 +53,56 @@ class MoodRepository {
     return theme ?? false;
   }
 
-  Future<Map<String, int>> getMoodStats({
-    required DateTime startDate,
-    required DateTime endDate,
-  }) async {
+  Future<Map<String, Map<String, int>>> getMoodStatsByWeek() async {
     final db = await dbHelper.database;
 
-    final List<Map<String, dynamic>> result = await db.query(
-      'mood',
-      columns: ['mood'],
-      where: 'timestamp BETWEEN ? AND ?',
-      whereArgs: [startDate.toIso8601String(), endDate.toIso8601String()],
-    );
-
-    final Map<String, int> moodCounts = {};
-    for (var row in result) {
-      final mood = row['mood'] as String;
-      moodCounts[mood] = (moodCounts[mood] ?? 0) + 1;
+    final earliestDateResult = await db.rawQuery('''
+    SELECT MIN(timestamp) AS earliest_date FROM mood
+  ''');
+    if (earliestDateResult.isEmpty ||
+        earliestDateResult.first['earliest_date'] == null) {
+      return {};
     }
 
-    return moodCounts;
+    final earliestDate = DateTime.parse(
+      earliestDateResult.first['earliest_date'] as String,
+    );
+
+    final earliestDateNormalized = DateTime(
+      earliestDate.year,
+      earliestDate.month,
+      earliestDate.day,
+    );
+
+    final startOfFirstWeek = earliestDateNormalized.subtract(
+      Duration(days: earliestDateNormalized.weekday % 7),
+    );
+
+    final result = await db.rawQuery(
+      '''
+    SELECT
+      date(julianday(timestamp) - (julianday(timestamp) - julianday(?)) % 7) AS week_start,
+      mood,
+      COUNT(*) AS count
+    FROM mood
+    WHERE timestamp >= ?
+    GROUP BY week_start, mood
+    ORDER BY week_start DESC
+      ''',
+      [startOfFirstWeek.toIso8601String(), startOfFirstWeek.toIso8601String()],
+    );
+
+    final Map<String, Map<String, int>> weeklyMoodStats = {};
+    for (var row in result) {
+      final weekStart = row['week_start'] as String;
+      final mood = row['mood'] as String;
+      final count = row['count'] as int;
+
+      if (!weeklyMoodStats.containsKey(weekStart)) {
+        weeklyMoodStats[weekStart] = {};
+      }
+      weeklyMoodStats[weekStart]![mood] = count;
+    }
+    return weeklyMoodStats;
   }
 }

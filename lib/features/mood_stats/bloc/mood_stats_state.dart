@@ -19,19 +19,21 @@ class MoodStatsInitial extends MoodStatsState {
 class MoodStatsLoading extends MoodStatsState {}
 
 class MoodStatsLoaded extends MoodStatsState {
-  final Map<String, double> moodPercentages;
-  final String dateRange;
+  final List<Map<String, double>> weeklyMoodPercentages;
+  final List<Map<String, int>> weeklyMoodCounts; // Add this
+  final List<String> dateRanges;
 
   const MoodStatsLoaded({
-    required this.moodPercentages,
-    required this.dateRange,
+    required this.weeklyMoodPercentages,
+    required this.weeklyMoodCounts, // Add this
+    required this.dateRanges,
   });
 
   @override
   bool get isSuccess => true;
 
   @override
-  List<Object> get props => [moodPercentages, dateRange];
+  List<Object> get props => [weeklyMoodPercentages, weeklyMoodCounts, dateRanges];
 }
 
 class MoodStatsError extends MoodStatsState {
