@@ -16,7 +16,7 @@ class TitleText extends StatelessWidget {
               "Feelio",
               textAlign: TextAlign.start,
               style: TextStyle(
-                fontSize: 120,
+                fontSize: 100,
                 fontWeight: FontWeight.bold,
                 fontFamily: GoogleFonts.dynaPuff().fontFamily,
                 foreground:
@@ -30,7 +30,7 @@ class TitleText extends StatelessWidget {
               "Feelio",
               textAlign: TextAlign.start,
               style: TextStyle(
-                fontSize: 120,
+                fontSize: 100,
                 fontWeight: FontWeight.bold,
                 fontFamily: GoogleFonts.dynaPuff().fontFamily,
                 color: Colors.amberAccent,
