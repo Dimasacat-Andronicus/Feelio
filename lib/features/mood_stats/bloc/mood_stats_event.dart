@@ -7,12 +7,4 @@ abstract class MoodStatsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FetchMoodStatsEvent extends MoodStatsEvent {
-  final DateTime startDate;
-  final DateTime endDate;
-
-  const FetchMoodStatsEvent({required this.startDate, required this.endDate});
-
-  @override
-  List<Object> get props => [startDate, endDate];
-}
+class FetchMoodStatsEvent extends MoodStatsEvent {}
