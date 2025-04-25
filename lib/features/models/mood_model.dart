@@ -28,7 +28,7 @@ class MoodModel {
       id: map['id'] != null ? map['id'] as int : null,
       mood: map['mood'] as String,
       description: map['description'] as String,
-      timestamp: DateTime.now().toIso8601String(),
+      timestamp: map['timestamp'] as String,
     );
   }
 
