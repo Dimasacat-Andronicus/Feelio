@@ -1,7 +1,6 @@
+import 'package:feelio/utils/mood_enums.dart';
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
-
-import '../../../shared/helpers.dart/mood_color.dart';
 
 class MoodPieChart extends StatelessWidget {
   final Map<String, double> moodPercentages;
@@ -19,7 +18,7 @@ class MoodPieChart extends StatelessWidget {
         chartRadius: 200,
         colorList:
             moodPercentages.keys
-                .map((key) => getMoodColor(key).withAlpha((0.5 * 255).toInt()))
+                .map((key) => Mood.values.byName(key.toLowerCase()).emojiColor)
                 .toList(),
         chartType: ChartType.ring,
         chartValuesOptions: const ChartValuesOptions(

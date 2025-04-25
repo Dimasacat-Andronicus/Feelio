@@ -1,6 +1,5 @@
+import 'package:feelio/utils/mood_enums.dart';
 import 'package:flutter/material.dart';
-import '../../../shared/helpers.dart/emoji_returner.dart';
-import '../../../shared/helpers.dart/mood_color.dart';
 
 class MoodChips extends StatelessWidget {
   final Map<String, int> moodCounts;
@@ -16,12 +15,13 @@ class MoodChips extends StatelessWidget {
           moodCounts.entries.map((entry) {
             return Chip(
               label: Text(
-                '${getMoodEmoji(entry.key)}: ${entry.value}',
+                '${Mood.values.byName(entry.key).emoji}: ${Mood.values.byName(entry.key).name}',
                 style: const TextStyle(fontSize: 14),
               ),
-              backgroundColor: getMoodColor(
-                entry.key,
-              ).withAlpha((0.2 * 255).toInt()),
+              backgroundColor: Mood.values
+                  .byName(entry.key)
+                  .emojiColor
+                  .withAlpha((0.2 * 255).toInt()),
               side: BorderSide.none,
             );
           }).toList(),
