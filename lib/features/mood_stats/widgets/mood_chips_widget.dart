@@ -16,7 +16,7 @@ class MoodChips extends StatelessWidget {
           moodCounts.entries.map((entry) {
             return Chip(
               label: Text(
-                '${Mood.values.byName(entry.key).emoji}: ${Mood.values.byName(entry.key).name}',
+                '${Mood.values.byName(entry.key).emoji}: ${entry.value}',
                 style: TextStyle(fontSize: 14, color: colorTheme.primary),
               ),
               backgroundColor: Mood.values
