@@ -1,8 +1,7 @@
+import 'package:feelio/utils/mood_enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_chart/fl_chart.dart';
-import '../../../shared/helpers.dart/emoji_returner.dart';
-import '../../../shared/helpers.dart/mood_color.dart';
 import '../bloc/mood_stats_bloc.dart';
 
 class MoodStatsLayout extends StatelessWidget {
@@ -13,6 +12,7 @@ class MoodStatsLayout extends StatelessWidget {
     final now = DateTime.now();
     final startOfWeek = now.subtract(Duration(days: now.weekday - 1));
     final endOfWeek = startOfWeek.add(const Duration(days: 6));
+    final colorTheme = Theme.of(context).colorScheme;
 
     context.read<MoodStatsBloc>().add(
       FetchMoodStatsEvent(startDate: startOfWeek, endDate: endOfWeek),
@@ -50,7 +50,9 @@ class MoodStatsLayout extends StatelessWidget {
                     children: [
                       Text(
                         week['dateRange'] as String,
+                        textAlign: TextAlign.center,
                         style: TextStyle(
+                          color: colorTheme.primary,
                           fontSize: 18,
                           fontWeight:
                               isCurrentWeek
@@ -73,13 +75,18 @@ class MoodStatsLayout extends StatelessWidget {
                                       return PieChartSectionData(
                                         value: entry.value.toDouble(),
                                         title:
-                                            '${getMoodEmoji(entry.key)}\n${entry.value.toStringAsFixed(1)}%',
-                                        color: getMoodColor(entry.key),
+                                            '${Mood.values.byName(entry.key.toLowerCase()).emoji}\n${entry.value.toStringAsFixed(1)}%',
+
+                                        // color: getMoodColor(entry.key),
+                                        color:
+                                            Mood.values
+                                                .byName(entry.key.toLowerCase())
+                                                .emojiColor,
                                         radius: 105,
-                                        titleStyle: const TextStyle(
+                                        titleStyle: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.white,
+                                          color: colorTheme.primary,
                                         ),
                                         titlePositionPercentageOffset: 0.6,
                                       );

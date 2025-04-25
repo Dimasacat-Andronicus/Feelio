@@ -18,15 +18,25 @@ class SaveButtonContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    final colorTheme = Theme.of(context).colorScheme;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
       children: [
         ButtonWidget(
+          text: "Cancel",
+          textColor: colorTheme.onError,
+          backgroundColor: colorTheme.error,
+          onPressed: () => context.pushNamed("home"),
+        ),
+        SizedBox(width: 20),
+        ButtonWidget(
           text: "Save",
-          backgroundColor: Colors.blue,
+          textColor: colorTheme.surface,
+          backgroundColor: colorTheme.onPrimaryContainer,
           onPressed: () {
             final description = controller.text;
-
-            if (description.isEmpty || description == "") {
+            if (description.isEmpty) {
               showSnackBarMessage(context, Str().addDesc, Colors.red);
               print("Description is empty: $description");
             } else {
@@ -43,12 +53,6 @@ class SaveButtonContainer extends StatelessWidget {
               controller.clear();
             }
           },
-        ),
-        SizedBox(height: 10),
-        ButtonWidget(
-          text: "Cancel",
-          backgroundColor: Colors.red,
-          onPressed: () => context.pushNamed("home"),
         ),
       ],
     );

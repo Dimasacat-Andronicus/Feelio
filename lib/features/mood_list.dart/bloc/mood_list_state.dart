@@ -1,27 +1,20 @@
 part of 'mood_list_bloc.dart';
 
+enum EmojiMoodStatus { initial, loading, loaded, error, empty }
+
 extension EmojiMoodStatusX on EmojiMoodStatus {
   bool get isInitial => this == EmojiMoodStatus.initial;
   bool get isLoading => this == EmojiMoodStatus.loading;
   bool get isLoaded => this == EmojiMoodStatus.loaded;
   bool get isError => this == EmojiMoodStatus.error;
   bool get isEmpty => this == EmojiMoodStatus.empty;
-  bool get isHappy => this == EmojiMoodStatus.happy;
-  bool get isSad => this == EmojiMoodStatus.sad;
-  bool get isAngry => this == EmojiMoodStatus.angry;
-  bool get isNervous => this == EmojiMoodStatus.nervous;
-  bool get isSleepy => this == EmojiMoodStatus.sleepy;
-  bool get isCurious => this == EmojiMoodStatus.curious;
-  bool get isOverthinking => this == EmojiMoodStatus.overthinking;
-  bool get isWow => this == EmojiMoodStatus.wow;
-  bool get isCool => this == EmojiMoodStatus.cool;
 }
 
 class EmojiMoodState extends Equatable {
   const EmojiMoodState({
     this.status = EmojiMoodStatus.empty,
     this.errorMessage = '',
-    this.emoji = '',
+    this.emoji = 'sad',
     this.userMood = const [],
   });
   final EmojiMoodStatus status;

@@ -25,6 +25,7 @@ class _JournalViewContainerState extends State<JournalViewContainer> {
 
   @override
   Widget build(BuildContext context) {
+    final colorTheme = Theme.of(context).colorScheme;
     final List<Map<String, dynamic>> mood =
         widget.state.userMood.map((e) => e.toMap()).toList();
     final String description =
@@ -39,10 +40,11 @@ class _JournalViewContainerState extends State<JournalViewContainer> {
         controller: _scrollController,
         child: SingleChildScrollView(
           controller: _scrollController,
-          padding: const EdgeInsets.all(
-            12,
-          ), // Adds padding for better readability
-          child: Text(description, style: TextStyle(fontSize: 14)),
+          padding: const EdgeInsets.all(12),
+          child: Text(
+            description,
+            style: TextStyle(fontSize: 14, color: colorTheme.primary),
+          ),
         ),
       ),
     );
