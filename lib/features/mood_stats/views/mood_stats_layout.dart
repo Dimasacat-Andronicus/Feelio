@@ -24,7 +24,7 @@ class _MoodStatsLayoutState extends State<MoodStatsLayout> {
   @override
   Widget build(BuildContext context) {
     context.read<MoodStatsBloc>().add(FetchMoodStatsEvent());
-
+    final colorTheme = Theme.of(context).colorScheme;
     return BlocBuilder<MoodStatsBloc, MoodStatsState>(
       builder: (context, state) {
         if (state is MoodStatsLoading) {
@@ -83,10 +83,10 @@ class _MoodStatsLayoutState extends State<MoodStatsLayout> {
                                 children: [
                                   Text(
                                     formatDateRange(dateRange),
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.black87,
+                                      color: colorTheme.primary,
                                     ),
                                   ),
                                   const SizedBox(height: 50),
@@ -99,10 +99,10 @@ class _MoodStatsLayoutState extends State<MoodStatsLayout> {
                               )
                               : Text(
                                 formatDateRange(dateRange),
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black87,
+                                  color: colorTheme.primary,
                                 ),
                               ),
                     ),

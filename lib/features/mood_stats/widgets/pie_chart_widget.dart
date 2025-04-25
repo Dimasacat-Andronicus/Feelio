@@ -9,6 +9,7 @@ class MoodPieChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorTheme = Theme.of(context).colorScheme;
     return SizedBox(
       height: 300,
       child: PieChart(
@@ -21,7 +22,7 @@ class MoodPieChart extends StatelessWidget {
                 .map((key) => Mood.values.byName(key.toLowerCase()).emojiColor)
                 .toList(),
         chartType: ChartType.ring,
-        chartValuesOptions: const ChartValuesOptions(
+        chartValuesOptions: ChartValuesOptions(
           showChartValuesInPercentage: true,
           showChartValuesOutside: true,
           showChartValueBackground: false,
@@ -29,11 +30,12 @@ class MoodPieChart extends StatelessWidget {
           chartValueStyle: TextStyle(
             fontSize: 10,
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: colorTheme.primary,
           ),
         ),
-        legendOptions: const LegendOptions(
+        legendOptions: LegendOptions(
           showLegends: true,
+          legendTextStyle: TextStyle(fontSize: 12, color: colorTheme.primary),
           legendPosition: LegendPosition.bottom,
           showLegendsInRow: true,
         ),
