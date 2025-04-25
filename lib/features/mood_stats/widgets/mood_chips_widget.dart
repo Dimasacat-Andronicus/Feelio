@@ -8,6 +8,7 @@ class MoodChips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorTheme = Theme.of(context).colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 4,
@@ -16,7 +17,7 @@ class MoodChips extends StatelessWidget {
             return Chip(
               label: Text(
                 '${Mood.values.byName(entry.key).emoji}: ${Mood.values.byName(entry.key).name}',
-                style: const TextStyle(fontSize: 14),
+                style: TextStyle(fontSize: 14, color: colorTheme.primary),
               ),
               backgroundColor: Mood.values
                   .byName(entry.key)
