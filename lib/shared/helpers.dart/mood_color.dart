@@ -3,24 +3,24 @@ import 'package:flutter/material.dart';
 Color getMoodColor(String mood) {
   switch (mood) {
     case 'Happy':
-      return Colors.yellow[700]!;
+      return Colors.yellow[600]!;
     case 'Sad':
-      return Colors.blue[800]!;
+      return Colors.indigo[700]!;
     case 'Angry':
-      return Colors.red[800]!;
+      return Colors.red[700]!;
     case 'Nervous':
-      return Colors.orange[800]!;
+      return Colors.deepOrange[600]!;
     case 'Sleepy':
-      return Colors.purple[800]!;
+      return Colors.deepPurple[600]!;
     case 'Curious':
-      return Colors.green[800]!;
+      return Colors.lime[700]!;
     case 'Overthinking':
-      return Colors.brown[800]!;
+      return Colors.brown[600]!;
     case 'Wow':
-      return Colors.teal[800]!;
+      return Colors.amber[600]!;
     case 'Cool':
-      return Colors.cyan[800]!;
+      return Colors.cyan[400]!;
     default:
-      return Colors.grey[800]!;
+      return Colors.grey[500]!;
   }
 }
