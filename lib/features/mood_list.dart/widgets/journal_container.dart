@@ -1,5 +1,5 @@
 import 'package:feelio/features/mood_list.dart/bloc/mood_list_bloc.dart';
-import 'package:feelio/utils/strings.dart';
+import 'package:feelio/utils/mood_enums.dart';
 import 'package:flutter/material.dart';
 
 class JournalContainer extends StatelessWidget {
@@ -13,15 +13,24 @@ class JournalContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorTheme = Theme.of(context).colorScheme;
+
     return Material(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(Str().hru, style: TextStyle(fontSize: 16)),
+          Text(
+            Mood.values.byName(state.emoji).description,
+            style: TextStyle(fontSize: 12, color: colorTheme.secondary),
+          ),
           const SizedBox(height: 15),
           Text(
             state.emoji,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: colorTheme.primary,
+            ),
           ),
           const SizedBox(height: 15),
         ],

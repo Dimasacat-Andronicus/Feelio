@@ -1,8 +1,9 @@
 import 'package:feelio/features/mood_entry/bloc/mood_entry_bloc.dart';
+import 'package:feelio/features/mood_list.dart/views/mood_list_page.dart';
 import 'package:feelio/shared/helpers.dart/mood_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:page_transition/page_transition.dart';
 
 class MoodHome extends StatefulWidget {
   const MoodHome({super.key});
@@ -17,6 +18,7 @@ class _MoodHomeState extends State<MoodHome> {
     super.initState();
     context.read<MoodEntryBloc>().add(const NavigatePageEvent(page: 'home'));
     context.read<MoodEntryBloc>().add(GetMoodThemeEvent());
+    context.read<MoodEntryBloc>().add((GetAllMoodEvent()));
   }
 
   @override
@@ -81,7 +83,10 @@ class _MoodHomeState extends State<MoodHome> {
 
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              context.pushNamed('add-mood');
+              context.pushTransition(
+                type: PageTransitionType.fade,
+                childBuilder: (context) => MoodListPage(),
+              );
             },
             tooltip: 'Add New Mood',
             child: const Icon(Icons.add),

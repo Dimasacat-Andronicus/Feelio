@@ -8,23 +8,26 @@ class TextArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorTheme = Theme.of(context).colorScheme;
     return Material(
       child: TextField(
+        style: TextStyle(fontSize: 14.0, color: colorTheme.primary),
         controller: controller,
         maxLines: 5,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(12),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
-            borderSide: const BorderSide(),
+            borderSide: BorderSide(color: colorTheme.secondaryContainer),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
-            borderSide: const BorderSide(),
+            borderSide: BorderSide(color: colorTheme.secondaryContainer),
           ),
           hintText: "Describe your mood...",
-          hintStyle: const TextStyle(fontSize: 14.0),
-          filled: true, // Background color for better visibility
+
+          hintStyle: TextStyle(fontSize: 12.0, color: colorTheme.secondary),
+          filled: true,
         ),
       ),
     );

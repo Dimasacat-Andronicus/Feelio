@@ -33,20 +33,12 @@ class MyApp extends StatelessWidget {
                   moodRepository: context.read<MoodRepository>(),
                 ),
           ),
+
           BlocProvider(
             create:
                 (context) => MoodEntryBloc(
                   moodRepository: context.read<MoodRepository>(),
                 )..add(GetAllMoodEvent()),
-          ),
-          BlocProvider(
-            create:
-                (context) =>
-                    MoodEntryBloc(
-                        moodRepository: context.read<MoodRepository>(),
-                      )
-                      ..add(GetMoodThemeEvent())
-                      ..add(GetAllMoodEvent()),
           ),
           BlocProvider(
             create:
@@ -61,7 +53,6 @@ class MyApp extends StatelessWidget {
           builder: (context, state) {
             final bool isDarkMode = state.isDarkMode;
             return MaterialApp.router(
-              title: 'Feelio',
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
                 useMaterial3: true,
