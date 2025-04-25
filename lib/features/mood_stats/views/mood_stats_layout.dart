@@ -18,7 +18,7 @@ class _MoodStatsLayoutState extends State<MoodStatsLayout> {
   @override
   void initState() {
     super.initState();
-    _openedCardIndex = 0; // Open the latest card by default
+    _openedCardIndex = 0;
   }
 
   @override
@@ -54,7 +54,10 @@ class _MoodStatsLayoutState extends State<MoodStatsLayout> {
                   });
                 },
                 child: Card(
-                  margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 16,
+                  ),
                   elevation: 6,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
@@ -73,32 +76,35 @@ class _MoodStatsLayoutState extends State<MoodStatsLayout> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(16),
-                      child: isOpen
-                          ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            formatDateRange(dateRange),
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black87,
-                            ),
-                          ),
-                          const SizedBox(height: 50),
-                          MoodPieChart(moodPercentages: moodPercentages),
-                          const SizedBox(height: 16),
-                          MoodChips(moodCounts: moodCounts),
-                        ],
-                      )
-                          : Text(
-                        formatDateRange(dateRange),
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
-                      ),
+                      child:
+                          isOpen
+                              ? Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    formatDateRange(dateRange),
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 50),
+                                  MoodPieChart(
+                                    moodPercentages: moodPercentages,
+                                  ),
+                                  const SizedBox(height: 16),
+                                  MoodChips(moodCounts: moodCounts),
+                                ],
+                              )
+                              : Text(
+                                formatDateRange(dateRange),
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),
+                              ),
                     ),
                   ),
                 ),
