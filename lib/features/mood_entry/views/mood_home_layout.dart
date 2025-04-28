@@ -48,8 +48,6 @@ class _MoodHomeState extends State<MoodHome> {
 
           bottomNavigationBar: BottomAppBar(
             height: 80,
-            shape: CircularNotchedRectangle(),
-            notchMargin: 6,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -72,15 +70,6 @@ class _MoodHomeState extends State<MoodHome> {
               ],
             ),
           ),
-          body:
-              state.status.isLoading
-                  ? const Center(child: CircularProgressIndicator())
-                  : state.status.isError
-                  ? Center(child: Text('Error: ${state.errorMessage}'))
-                  : state.status.isLoaded
-                  ? pageScreen
-                  : const Center(child: CircularProgressIndicator()),
-
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               context.pushTransition(
@@ -91,6 +80,14 @@ class _MoodHomeState extends State<MoodHome> {
             tooltip: 'Add New Mood',
             child: const Icon(Icons.add),
           ),
+          body:
+              state.status.isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : state.status.isError
+                  ? Center(child: Text('Error: ${state.errorMessage}'))
+                  : state.status.isLoaded
+                  ? pageScreen
+                  : const Center(child: CircularProgressIndicator()),
         );
       },
     );

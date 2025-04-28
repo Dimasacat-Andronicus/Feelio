@@ -36,14 +36,10 @@ class _MoodHomeListState extends State<MoodHomeList> {
           return const Center(child: Text('No moods available.'));
         }
 
-        final sortedMoods = List<MoodModel>.from(state.moods)
-          ..sort((a, b) => DateTime.parse(b.timestamp)
-              .compareTo(DateTime.parse(a.timestamp)));
-
         return ListView.builder(
-          itemCount: sortedMoods.length,
+          itemCount: state.moods.length,
           itemBuilder: (context, index) {
-            final mood = sortedMoods[index];
+            final mood = state.moods[index];
             final date = DateTime.parse(mood.timestamp);
             return GestureDetector(
               onTap: () {

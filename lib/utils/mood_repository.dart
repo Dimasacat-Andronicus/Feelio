@@ -28,15 +28,23 @@ class MoodRepository {
       where: 'id = ?',
       whereArgs: [id],
     );
-    log("result: $result");
+    log("result sorted: $result");
     return result.map((map) => MoodModel.fromMap(map)).toList();
   }
 
   Future<List<MoodModel>> getAllListMood() async {
     final db = await dbHelper.database;
     final List<Map<String, dynamic>> result = await db.query('mood');
+
+    final sortedMoods =
+        result.map((map) => MoodModel.fromMap(map)).toList()..sort(
+          (a, b) => DateTime.parse(
+            b.timestamp,
+          ).compareTo(DateTime.parse(a.timestamp)),
+        );
+
     log("result: $result");
-    return result.map((map) => MoodModel.fromMap(map)).toList();
+    return sortedMoods;
   }
 
   Future<bool> setUserTheme(bool isDarkMode) async {

@@ -16,18 +16,12 @@ class MoodViewBloc extends Bloc<MoodViewEvent, MoodViewState> {
     ViewUserMoodEvent event,
     Emitter<MoodViewState> emit,
   ) async {
-    emit(state.copyWith(status: MoodViewStatus.loading));
-
     try {
       final moods = await moodRepository.viewUserMood(event.id);
-
       if (moods.isNotEmpty) {
-        final userMood = moods.first; // Get the first result
+        final userMood = moods.first;
         emit(
-          state.copyWith(
-            status: MoodViewStatus.loaded,
-            userMood: [userMood], // Wrap single MoodModel in a list
-          ),
+          state.copyWith(status: MoodViewStatus.loaded, userMood: [userMood]),
         );
       } else {
         emit(

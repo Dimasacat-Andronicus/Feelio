@@ -36,7 +36,7 @@ class MoodViewPage extends StatelessWidget {
                     ? const Center(child: CircularProgressIndicator())
                     : state.status.isError
                     ? const Center(child: Text("Error loading mood"))
-                    : state.status.isLoaded
+                    : state.status.isLoaded && state.userMood.isNotEmpty
                     ? Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -47,7 +47,7 @@ class MoodViewPage extends StatelessWidget {
                         const SizedBox(height: 15),
                       ],
                     )
-                    : const SizedBox(),
+                    : const Center(child: Text("No mood data available")),
           ),
         );
       },

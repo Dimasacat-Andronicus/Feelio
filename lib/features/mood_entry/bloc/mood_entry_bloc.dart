@@ -30,13 +30,13 @@ class MoodEntryBloc extends Bloc<MoodEntryEvent, MoodEntryState> {
     try {
       final moods = await moodRepository.getAllListMood();
 
-      final loadedState = loadingState.copyWith(
+      final loadedState = state.copyWith(
         status: EmojiMoodStatus.loaded,
         moods: moods,
       );
       emit(loadedState);
     } catch (e) {
-      final errorState = loadingState.copyWith(
+      final errorState = state.copyWith(
         status: EmojiMoodStatus.error,
         errorMessage: e.toString(),
       );
@@ -52,13 +52,13 @@ class MoodEntryBloc extends Bloc<MoodEntryEvent, MoodEntryState> {
     emit(loadingState);
     try {
       // await Future.delayed(const Duration(seconds: 1));
-      final loadedState = loadingState.copyWith(
+      final loadedState = state.copyWith(
         status: EmojiMoodStatus.loaded,
         page: event.page,
       );
       emit(loadedState);
     } catch (e) {
-      final errorState = loadingState.copyWith(
+      final errorState = state.copyWith(
         status: EmojiMoodStatus.error,
         errorMessage: e.toString(),
       );
@@ -70,18 +70,15 @@ class MoodEntryBloc extends Bloc<MoodEntryEvent, MoodEntryState> {
     ToggleMoodThemeEvent event,
     Emitter<MoodEntryState> emit,
   ) async {
-    final loadingState = state.copyWith(status: EmojiMoodStatus.loading);
-    emit(loadingState);
-
     try {
       final setTheme = await moodRepository.setUserTheme(event.isDarkMode);
-      final themeState = loadingState.copyWith(
+      final themeState = state.copyWith(
         status: EmojiMoodStatus.loaded,
         isDarkMode: setTheme,
       );
       emit(themeState);
     } catch (e) {
-      final errorState = loadingState.copyWith(
+      final errorState = state.copyWith(
         status: EmojiMoodStatus.error,
         errorMessage: e.toString(),
       );
@@ -98,13 +95,13 @@ class MoodEntryBloc extends Bloc<MoodEntryEvent, MoodEntryState> {
 
     try {
       final getTheme = await moodRepository.getUserTheme();
-      final themeState = loadingState.copyWith(
+      final themeState = state.copyWith(
         status: EmojiMoodStatus.loaded,
         isDarkMode: getTheme,
       );
       emit(themeState);
     } catch (e) {
-      final errorState = loadingState.copyWith(
+      final errorState = state.copyWith(
         status: EmojiMoodStatus.error,
         errorMessage: e.toString(),
       );
